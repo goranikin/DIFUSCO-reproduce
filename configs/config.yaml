@@ -1,0 +1,9 @@
+defaults:
+  - data: tsp50
+  - model: paper
+  - diffusion: categorical
+  - training: default
+  - inference: default
+  - wandb: default
+
+data_path: ./src/tsp50_128000_concorde.txt

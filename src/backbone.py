@@ -100,7 +100,7 @@ class DifuscoBackbone(nn.Module):
             nn.Linear(hidden_dim, hidden_dim),
         )
 
-        self.layers = nn.ModuleList(
+        self.layers: nn.ModuleList[AGNNLayer] = nn.ModuleList(
             [AGNNLayer(hidden_dim, hidden_dim) for _ in range(num_layers)]
         )
 
@@ -125,16 +125,26 @@ class DifuscoBackbone(nn.Module):
         x_t: torch.Tensor,
         t: torch.Tensor,
     ):
+        """
+        node_coords: (N, 2)
+        edge_index: (2, E)
+        edge_distances: (E,)
+        x_t: (E,) current noisy edge labels
+        t: (1,) timestep (scalar)
+        """
         # (N, hidden_dim)
         h = self.node_pos_embed(node_coords)
 
+        # (N*(N-1), hidden_dim//2)
         e_dist = self.edge_dist_embed(edge_distances)
+        # (N*(N-1), hidden_dim//2)
         e_noise = self.edge_noise_embed(x_t)
+        # (N*(N-1), hidden_dim)
         e = torch.cat([e_dist, e_noise], dim=-1)
 
+        # (1, hidden_dim)
         t_emb = timestep_embedding(t, self.hidden_dim)
         t_emb = self.time_proj(t_emb.unsqueeze(0) if t_emb.dim() == 1 else t_emb)
-        # (1, hidden_dim) — will broadcast to all edges
 
         for layer in self.layers:
             h, e = layer(h, e, edge_index, t_emb)

@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+wandb/
+outputs/
+
+# Large data & checkpoint files
+*.pt
+src/tsp50_*.txt

@@ -40,13 +40,13 @@ class DifuscoTSP(nn.Module):
 
     def training_step(self, batch, device):
         """
-        One training step.
+        One training step. Accepts a batched super-graph from collate_tsp.
         """
         node_feat, edge_index, edge_dist, edge_label = batch
-        node_feat = node_feat.squeeze(0).to(device)
-        edge_index = edge_index.squeeze(0).to(device)
-        edge_dist = edge_dist.squeeze(0).to(device)
-        edge_label = edge_label.squeeze(0).to(device)
+        node_feat = node_feat.to(device)
+        edge_index = edge_index.to(device)
+        edge_dist = edge_dist.to(device)
+        edge_label = edge_label.to(device)
 
         t = torch.randint(0, self.T, (1,), device=device).long()
 

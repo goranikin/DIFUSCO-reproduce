@@ -1,0 +1,4 @@
+inference_steps: 50
+schedule: cosine
+use_2opt: true
+eval_subset: 500
