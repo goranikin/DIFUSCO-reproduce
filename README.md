@@ -99,17 +99,19 @@ uv run python -m src.main data_path=... wandb.mode=disabled
 
 ## Hyperparameters (Paper Section 4.1)
 
-| Parameter | Value |
-|---|---|
-| Hidden dimension | 256 |
-| AGNN layers | 12 |
-| Diffusion steps (T) | 1000 |
-| Beta schedule | linear, 1e-4 to 0.02 |
-| Optimizer | AdamW |
-| Learning rate | 2e-4 (cosine annealing) |
-| Weight decay | 1e-4 |
-| Inference steps | 50 (cosine schedule) |
-| Post-processing | Greedy decode + 2-opt |
+
+| Parameter           | Value                   |
+| ------------------- | ----------------------- |
+| Hidden dimension    | 256                     |
+| AGNN layers         | 12                      |
+| Diffusion steps (T) | 1000                    |
+| Beta schedule       | linear, 1e-4 to 0.02    |
+| Optimizer           | AdamW                   |
+| Learning rate       | 2e-4 (cosine annealing) |
+| Weight decay        | 1e-4                    |
+| Inference steps     | 50 (cosine schedule)    |
+| Post-processing     | Greedy decode + 2-opt   |
+
 
 ## Tracking
 
@@ -130,3 +132,4 @@ Training metrics are logged to [Weights & Biases](https://wandb.ai):
   year={2023}
 }
 ```
+
