@@ -14,3 +14,4 @@ outputs/
 # Large data & checkpoint files
 *.pt
 src/tsp50_*.txt
+data/*.txt

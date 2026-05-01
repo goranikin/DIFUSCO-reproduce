@@ -122,6 +122,18 @@ Training metrics are logged to [Weights & Biases](https://wandb.ai):
 - `val/gap_pct` — optimality gap vs Concorde solutions
 - `val/pred_tour_length`, `val/gt_tour_length` — tour lengths
 
+## Results
+
+### TSP-100 (categorical diffusion, 50 inference steps + 2-opt)
+
+| Metric              | Value      |
+| ------------------- | ---------- |
+| Instances evaluated | 1280       |
+| Predicted tour len  | 8.2203     |
+| Ground-truth len    | 7.7507     |
+| Optimality gap      | 6.0596%    |
+| Wall time           | 22620.3s (17.672s/instance) |
+
 ## References
 
 ```
