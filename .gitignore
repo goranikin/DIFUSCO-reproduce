@@ -15,3 +15,6 @@ outputs/
 *.pt
 src/tsp50_*.txt
 data/*.txt
+
+# macOS
+.DS_Store
