@@ -164,7 +164,6 @@ class DifuscoTSP(nn.Module):
                 return x_0_pred
             else:
                 # Sample x_{t-1} from posterior
-                next_t = timesteps[i + 1] if i + 1 < len(timesteps) else 0
                 x_t = self.diffusion.q_posterior(x_t, x_0_pred, t)
 
         return x_0_pred

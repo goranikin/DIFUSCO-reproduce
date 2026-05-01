@@ -24,7 +24,7 @@ class TSPDataset(Dataset):
                        if <= 0 (default), build a complete (dense) graph.
     """
 
-    def __init__(self, file_path: str, num_nodes: int = 50, sparse_factor: int = -1):
+    def __init__(self, file_path: str, num_nodes: int = 100, sparse_factor: int = -1):
         self.num_nodes = num_nodes
         self.sparse_factor = sparse_factor
         self.file_lines = open(file_path).read().splitlines()
@@ -51,6 +51,8 @@ class TSPDataset(Dataset):
         tour_str = parts[1].strip().split()
 
         coords = np.array([float(c) for c in coord_str]).reshape(-1, 2)
+        print(coords.shape)
+        print(self.num_nodes)
         assert coords.shape[0] == self.num_nodes
 
         tour = np.array([int(t) - 1 for t in tour_str])
@@ -98,9 +100,7 @@ class TSPDataset(Dataset):
         kdt = KDTree(coords, leaf_size=30, metric="euclidean")
         dists_knn, idx_knn = kdt.query(coords, k=k, return_distance=True)
 
-        src = (
-            torch.arange(N).reshape(-1, 1).repeat(1, k).reshape(-1)
-        )
+        src = torch.arange(N).reshape(-1, 1).repeat(1, k).reshape(-1)
         dst = torch.from_numpy(idx_knn.reshape(-1)).long()
         edge_index = torch.stack([src, dst], dim=0)
 
